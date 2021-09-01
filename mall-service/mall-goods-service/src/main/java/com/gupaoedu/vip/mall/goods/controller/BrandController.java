@@ -22,7 +22,7 @@ public class BrandController {
     private BrandService brandService;
 
     /****
-     * 增加方法
+     * 增加方法1
      */
     @PostMapping
     public RespResult add(@RequestBody Brand brand){
