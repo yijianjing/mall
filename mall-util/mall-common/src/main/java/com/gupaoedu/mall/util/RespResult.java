@@ -53,7 +53,7 @@ public class RespResult<T> implements Serializable {
     }
 
     //自定义异常
-    public static RespResult secByError(Integer code,String message) {
+    public static RespResult secByError(Integer code, String message) {
         RespResult err = new RespResult();
         err.setCode(code);
         err.setMessage(message);

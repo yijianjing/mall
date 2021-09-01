@@ -12,5 +12,11 @@
     <description>
         shop_goods对应的Api工程
     </description>
-
+    <dependencies>
+        <dependency>
+            <groupId>com.gupaoedu</groupId>
+            <artifactId>mall-cart-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>

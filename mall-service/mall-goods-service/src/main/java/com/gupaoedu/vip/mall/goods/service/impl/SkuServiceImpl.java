@@ -2,6 +2,7 @@ package com.gupaoedu.vip.mall.goods.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.gupaoedu.vip.mall.cart.model.Cart;
 import com.gupaoedu.vip.mall.goods.mapper.AdItemsMapper;
 import com.gupaoedu.vip.mall.goods.mapper.SkuMapper;
 import com.gupaoedu.vip.mall.goods.model.AdItems;
@@ -53,5 +54,20 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
     @CacheEvict(key ="#id")
     @Override
     public void delTypeSkuItems(Integer id) {
+    }
+
+    /***
+     * 库存递减
+     * @param carts
+     */
+    @Override
+    public void decount(List<Cart> carts) {
+        for (Cart cart : carts) {
+            //语句级控制，防止超卖
+            int count = skuMapper.decount(cart.getSkuId(),cart.getNum());
+            if(count<=0){
+                throw new RuntimeException("库存不足！");
+            }
+        }
     }
 }
