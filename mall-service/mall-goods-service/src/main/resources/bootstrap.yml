@@ -1,6 +1,10 @@
 server:
   port: 8081
 spring:
+  #Redis配置
+  redis:
+    host: 47.117.125.134
+    port: 6379
   application:
     name: mall-goods
   datasource:
