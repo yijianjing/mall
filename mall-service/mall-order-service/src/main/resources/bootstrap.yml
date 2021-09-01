@@ -25,7 +25,7 @@ feign:
   client:
     config:
       default:
-        connectTimeout: 10000
+        connectTimeout: 600000
         readTimeout: 600000
 # ====================MybatisPlus====================
 mybatis-plus:

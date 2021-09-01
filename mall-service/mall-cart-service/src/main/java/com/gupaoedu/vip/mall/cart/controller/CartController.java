@@ -20,6 +20,8 @@ public class CartController {
     /***
      * 添加购物车
      * id: skuid
+     * http://localhost:8087/cart/1318596430360813570/1
+     *
      */
     @GetMapping(value = "/{id}/{num}")
     public RespResult add(@PathVariable(value = "id")String id, @PathVariable(value = "num")Integer num){
@@ -48,6 +50,9 @@ public class CartController {
     public RespResult<List<Cart>> list(@RequestBody List<String> ids){
         //购物车集合
         List<Cart> carts = Lists.newArrayList(cartService.list(ids));
+//        String userName = "gp";
+//        List<Cart> carts = cartService.list(userName);
+
         return RespResult.ok(carts);
     }
 
