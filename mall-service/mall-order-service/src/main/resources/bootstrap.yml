@@ -5,17 +5,17 @@ spring:
     name: mall-order
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://47.117.125.134:3306/shop_goods?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://47.117.125.134:3306/shop_order?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
     password: 123456
   cloud:
     nacos:
       config:
         file-extension: yaml
-        server-addr: 47.117.125.134:8848
+        server-addr: 49.235.118.218:18848
       discovery:
         #Nacos的注册地址
-        server-addr: 47.117.125.134:8848
+        server-addr: 49.235.118.218:18848
     alibaba:
       seata:
         tx-service-group: tx_shop

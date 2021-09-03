@@ -12,10 +12,10 @@ spring:
     nacos:
       config:
         file-extension: yaml
-        server-addr: 47.117.125.134:8848
+        server-addr: 49.235.118.218:18848
       discovery:
         #Nacos的注册地址
-        server-addr: 47.117.125.134:8848
+        server-addr: 49.235.118.218:18848
   main:
     allow-bean-definition-overriding: true
 feign:

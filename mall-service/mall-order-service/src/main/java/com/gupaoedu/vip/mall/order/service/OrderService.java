@@ -11,5 +11,5 @@ import com.gupaoedu.vip.mall.order.model.OrderRefund;
 public interface OrderService extends IService<Order> {
 
     //添加订单
-    Boolean add(Order order);
+    Boolean add(Order order) throws Exception;
 }

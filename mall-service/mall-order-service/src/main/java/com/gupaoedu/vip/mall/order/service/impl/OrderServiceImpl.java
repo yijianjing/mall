@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.keyvalue.core.IterableConverter;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +29,7 @@ import java.util.List;
  * @Description:
  ****/
 @Service
-public class OrderServiceImpl extends ServiceImpl<OrderMapper,Order> implements OrderService {
+public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements OrderService {
 
     @Autowired
     private OrderSkuMapper orderSkuMapper;
@@ -49,13 +50,20 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper,Order> implements 
      */
     @GlobalTransactional
     @Override
-    public Boolean add(Order order) {
+    public Boolean add(Order order) throws Exception {
         //1.查询购物车记录
-        RespResult<List<Cart>> cartResp = cartFeign.list(order.getCartIds());
-        List<Cart> carts = IterableConverter.toList(cartResp.getData());
-        if(carts.size()==0){
-            return false;
-        }
+       // RespResult<List<Cart>> cartResp = cartFeign.list(order.getCartIds());
+        Cart c=new Cart();
+        c.set_id("1");
+        c.setImage("1");
+        c.setNum(1);
+        c.setName("1");
+        c.setPrice(1);
+        c.setSkuId("1318594982227025922");
+        c.setUserName("1");
+        List<Cart> carts =new ArrayList<>(); //IterableConverter.toList(cartResp.getData());
+         carts.add(c);
+
         //2.库存递减   20000  成功
         skuFeign.decount(carts);
 
@@ -66,22 +74,28 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper,Order> implements 
             //类型转换
             OrderSku orderSku = JSON.parseObject(JSON.toJSONString(cart), OrderSku.class);
             orderSku.setId(IdWorker.getIdStr());
-            orderSku.setMoney(orderSku.getPrice()*orderSku.getNum());
+            orderSku.setMoney(orderSku.getPrice() * orderSku.getNum());
             orderSku.setSkuId(cart.getSkuId());
             orderSku.setOrderId(order.getId());
             orderSkuMapper.insert(orderSku);
 
             //统计数据
-            totlNum+=cart.getNum();
-            payMoney+=orderSku.getMoney();
+            totlNum += cart.getNum();
+            payMoney += orderSku.getMoney();
         }
         //4.增加订单
         order.setTotalNum(totlNum);
         order.setMoneys(payMoney);
         orderMapper.insert(order);
 
+
+        int i=1/0;
+
         //5.删除购物车记录
-        cartFeign.delete(order.getCartIds());
+     //   cartFeign.delete(order.getCartIds());
+
         return true;
+
+
     }
 }

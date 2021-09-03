@@ -38,6 +38,7 @@ public class TransactionListener implements RocketMQLocalTransactionListener{
             String result = new String((byte[]) msg.getPayload(),"UTF-8");
             PayLog payLog = JSON.parseObject(result,PayLog.class);
             payLogService.add(payLog);
+            System.out.println(result);
             //========================本地事务控制===================
         } catch (Exception e) {
             e.printStackTrace();
