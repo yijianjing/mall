@@ -1,0 +1,39 @@
+server:
+  port: 9001
+spring:
+  redis:
+      host: 47.117.125.134
+      port: 6379
+  #producer
+  rocketmq:
+    name-server: 47.117.125.134:9876
+    producer:
+      group: hotorder-group
+      send-message-timeout: 300000
+      compress-message-body-threshold: 4096
+      max-message-size: 4194304
+      retry-times-when-send-async-failed: 0
+      retry-next-server: true
+      retry-times-when-send-failed: 2
+  application:
+    name: mall-gateway
+  cloud:
+    nacos:
+      config:
+        file-extension: yaml
+        server-addr: 47.117.125.134:8848
+      discovery:
+        #Nacos的注册地址
+        server-addr: 47.117.125.134:8848
+    gateway:
+      routes:
+        #秒杀
+        - id: seckill_route
+          uri: lb://mall-seckill
+          predicates:
+            - Path=/mall/**
+          filters:
+            - StripPrefix=1
+logging:
+  pattern:
+    console: "%msg%n"
