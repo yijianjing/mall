@@ -7,10 +7,10 @@ spring:
     nacos:
       config:
         file-extension: yaml
-        server-addr: 49.235.118.218:18848
+        server-addr: 120.48.23.107:8848
       discovery:
         #Nacos的注册地址
-        server-addr: 49.235.118.218:18848
+        server-addr: 120.48.23.107:8848
   data:
     #MongoDB配置
     #sh - 用户名、123456- 密码、192.168.100.130 - 数据库地址、27017- 端口号、shop - 库名
